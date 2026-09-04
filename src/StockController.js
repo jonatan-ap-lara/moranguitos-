@@ -1,5 +1,0 @@
-const Stock = require('../models/Stock');
-exports.list = async (req,res) => res.json(await Stock.find({userId:req.userId}).sort({name:1}));
-exports.create = async (req,res) => { try { res.status(201).json(await new Stock({...req.body,userId:req.userId,lastUpdated:new Date()}).save()); } catch(e){res.status(400).json({message:e.message});} };
-exports.update = async (req,res) => { try { const s=await Stock.findOneAndUpdate({_id:req.params.id,userId:req.userId},{...req.body,lastUpdated:new Date()},{new:true,runValidators:true}); if(!s)return res.status(404).json({message:'Item não encontrado'}); res.json(s);} catch(e){res.status(400).json({message:e.message});} };
-exports.remove = async (req,res) => { const s=await Stock.findOneAndDelete({_id:req.params.id,userId:req.userId}); if(!s)return res.status(404).json({message:'Item não encontrado'}); res.json({message:'Item excluído'}); };
