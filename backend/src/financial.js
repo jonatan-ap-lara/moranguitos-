@@ -1,2 +1,0 @@
-const router=require('express').Router(); const auth=require('../middleware/Auth'); const c=require('../controllers/FinancialController');
-router.use(auth); router.get('/dashboard',c.dashboard); router.get('/summary',c.summary); module.exports=router;

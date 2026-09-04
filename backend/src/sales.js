@@ -1,2 +1,0 @@
-const router=require('express').Router(); const auth=require('../middleware/Auth'); const c=require('../controllers/SaleController');
-router.use(auth); router.get('/',c.getSales); router.get('/:id',c.getSale); router.post('/',c.createSale); router.patch('/:id/cancel',c.cancelSale); module.exports=router;
