@@ -1,0 +1,2 @@
+const router=require('express').Router(); const auth=require('../middleware/Auth'); const c=require('../controllers/BackupController');
+router.use(auth); router.get('/export',c.exportData); module.exports=router;

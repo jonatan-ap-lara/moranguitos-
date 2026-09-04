@@ -1,0 +1,5 @@
+const Product = require('../models/Product');
+exports.list = async (req,res) => res.json(await Product.find({ userId:req.userId }).sort({name:1}));
+exports.create = async (req,res) => { try { res.status(201).json(await new Product({...req.body,userId:req.userId}).save()); } catch(e){res.status(400).json({message:e.message});} };
+exports.update = async (req,res) => { try { const p=await Product.findOneAndUpdate({_id:req.params.id,userId:req.userId},{...req.body,updatedAt:new Date()},{new:true,runValidators:true}); if(!p)return res.status(404).json({message:'Produto não encontrado'}); res.json(p);} catch(e){res.status(400).json({message:e.message});} };
+exports.remove = async (req,res) => { const p=await Product.findOneAndDelete({_id:req.params.id,userId:req.userId}); if(!p)return res.status(404).json({message:'Produto não encontrado'}); res.json({message:'Produto excluído'}); };
