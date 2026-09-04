@@ -1,0 +1,2 @@
+const router=require('express').Router(); const auth=require('../middleware/Auth'); const c=require('../controllers/ProductionController');
+router.use(auth); router.get('/',c.getProductions); router.post('/',c.createProduction); router.patch('/:id/cancel',c.cancelProduction); module.exports=router;
